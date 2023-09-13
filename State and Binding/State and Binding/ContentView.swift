@@ -11,6 +11,7 @@ struct ContentView: View {
     // Defining @State properties for TextField and Toggle
     @State private var textInput: String = ""
     @State private var isToggled: Bool = false
+    @State private var sliderValue: Double = 0.5
 
     var body: some View {
             VStack {
@@ -26,12 +27,15 @@ struct ContentView: View {
                 Toggle("Toggle", isOn: $isToggled)
                     .padding()
                 
+                Slider(value: $sliderValue, in: 0...1)
+                    .padding()
+                
                 Capsule()
                     .foregroundColor(.white)
                     .frame(height: 5)
                     .padding(.vertical, 30)
                 
-                AnotherView(textInput: $textInput, isToggled: $isToggled)
+                AnotherView(textInput: $textInput, isToggled: $isToggled, sliderValue: $sliderValue)
             }
             .padding()
         }
@@ -41,6 +45,7 @@ struct AnotherView: View {
     //Defining @Binding properties for the TextField and Toggle
     @Binding var textInput: String
     @Binding var isToggled: Bool
+    @Binding var sliderValue: Double
     
     var body: some View {
         VStack {
@@ -53,6 +58,9 @@ struct AnotherView: View {
                 .padding()
             
             Text("Toggle is \(isToggled ? "On" : "Off")")
+                .padding()
+            
+            Text("Slider Value: \(sliderValue, specifier: "%.2f")")
                 .padding()
             
         }
