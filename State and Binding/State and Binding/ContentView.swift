@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  Hello World Assignment
+//  State and Binding Assignment
 //
 //  Created by Jyothish Gompa on 9/12/23.
 //
