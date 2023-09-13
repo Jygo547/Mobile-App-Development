@@ -8,59 +8,53 @@
 import SwiftUI
 
 struct ContentView: View {
-    // Define @State properties for TextField and Toggle
-    @State private var a: String = ""
+    // Defining @State properties for TextField and Toggle
+    @State private var textInput: String = ""
     @State private var isToggled: Bool = false
-    
+
     var body: some View {
-        ZStack {
-            Color.black.ignoresSafeArea()
             VStack {
-                Capsule()
-                    .foregroundColor(.red)
-                    .frame(width: 200, height: 10)
-                    .padding()
-                Text("Type something below")
+                Text("Enter your Input:")
                     .foregroundColor(.blue)
                     .padding()
                     .font(.system(size: 35, weight: .bold))
                 
-                // Add a TextField that updates the textInput @State property
-                TextField("Enter text", text: $a)
+                TextField("Enter text", text: $textInput)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
                 
-                // Add a Toggle that updates the isToggled @State property
                 Toggle("Toggle", isOn: $isToggled)
                     .padding()
                 
-                AnotherView(a: $a, isToggled: $isToggled)
+                Capsule()
+                    .foregroundColor(.white)
+                    .frame(height: 5)
+                    .padding(.vertical, 30)
+                
+                AnotherView(textInput: $textInput, isToggled: $isToggled)
             }
             .padding()
         }
-    }
 }
 
 struct AnotherView: View {
-    // Define a Binding property to share isToggled between views
-    @Binding var a: String
+    //Defining @Binding properties for the TextField and Toggle
+    @Binding var textInput: String
     @Binding var isToggled: Bool
     
     var body: some View {
         VStack {
-            Text("A Different Binded View")
+            Text("View the Input below:")
                 .font(.system(size: 30, weight: .bold))
-                .foregroundColor(.yellow)
+                .foregroundColor(.blue)
                 .padding()
             // Use the shared Binding property to update the UI
+            Text("Text Input is '\(textInput)'")
+                .padding()
+            
             Text("Toggle is \(isToggled ? "On" : "Off")")
                 .padding()
-            Text("Text Input: \(a)")
-                .padding()
-            Capsule()
-                .foregroundColor(.red)
-                .frame(width: 200, height: 10)
-                .padding()
+            
         }
         
     }
@@ -68,7 +62,7 @@ struct AnotherView: View {
 
 struct ConsistentPadding: ViewModifier {
     func body(content: Content) -> some View {
-        content.padding(100)
+        content.padding(.vertical, 100)
     }
 }
 
