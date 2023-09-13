@@ -14,9 +14,33 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             VStack {
-                Text("Welcome to Navigation Demo")
-                    .font(.largeTitle)
-                    .padding()
+                HStack{
+                    Text("Recently Played")
+                        .font(.title2)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.leading, 20)
+                        .padding(.vertical)
+                        
+                }
+                
+                HStack {
+                    Image("Starfield")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 100, height: 100)
+                        .padding(.horizontal, 10)
+                    VStack {
+                        Text("Starfield")
+                            .padding(.vertical, 2)
+                        Text("Played 39m ago")
+                            .padding(.vertical, 2)
+                        Text("Total Time: 27 Hours")
+                            .padding(.vertical, 2)
+                    }
+                    .frame(alignment: .leading)
+                    
+                }
+                Spacer()
 
                 // 1. Tab Bar Navigation
                 NavigationLink(destination: TabbedView()) {
@@ -42,7 +66,7 @@ struct ContentView: View {
                 }
                 .padding()
             }
-            .navigationTitle("Home")
+            .navigationTitle("Games")
             .alert(isPresented: $showAlert) {
                 Alert(
                     title: Text("Alert Title"),
@@ -62,13 +86,14 @@ struct TabbedView: View {
         TabView {
             Text("Tab 1")
                 .tabItem {
-                    Label("Tab 1", systemImage: "1.circle")
+                    Label("Tab 1", systemImage: "clock")
                 }
             Text("Tab 2")
                 .tabItem {
                     Label("Tab 2", systemImage: "2.circle")
                 }
         }
+        .navigationTitle("Portal")
     }
 }
 
@@ -92,5 +117,11 @@ struct ModalView: View {
             }
             .padding()
         }
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
     }
 }
